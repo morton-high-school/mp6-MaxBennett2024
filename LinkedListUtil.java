@@ -4,6 +4,9 @@ public class LinkedListUtil {
     public static int length(LinkedList value){
         int count = 0;
         Node nuts = value.getFront();
+        if(value.getFront()==null){
+            return 0;
+        }
         while(nuts.getNext()!=null){
             nuts=nuts.getNext();
             count++;
@@ -54,11 +57,35 @@ public class LinkedListUtil {
 
     //determines if two lists contain the same data values
     public static boolean compare(LinkedList value1, LinkedList value2){
-        return true;
+        if(length(value1)==length(value2)){
+            Node temp1 = value1.getFront();
+            Node temp2 = value2.getFront();
+            while(temp1.getNext()!=null){
+                if(temp1.getData()==temp2.getData()){
+                    temp1 = temp1.getNext();
+                    temp2 = temp2.getNext();
+                }else{
+                    return false;
+                }
+            }
+        }
+
+        return false;
     }
 
     //returns a reversed version of the linked list without changing the original
     public static LinkedList reverse(LinkedList value){
+        int len = length(value)-1;
+        LinkedList reverse = new LinkedList();
+        for(int i = len;i>=0;i--){
+            Node temp = value.getFront();
+            int j =0;
+            while(j<i){
+                temp = temp.getNext();
+                j++;
+            }
+            reverse.append(temp);
+        }
         return null;
     }
 

@@ -1,7 +1,8 @@
 public class Queue {
     //default constructor
+    Node thing;
     public Queue(){
-
+        this.thing = null;
     }
 
     //adds an item to the back of the queue
