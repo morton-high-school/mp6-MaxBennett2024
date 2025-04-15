@@ -15,15 +15,16 @@ public class LinkedList {
 
     //adds a node to the end of the linked list
     public void append(Node node){
-        Node temp = thing;
-        if(temp!=null){
-            while(temp.getNext()!=null){
-                temp = temp.getNext();
-            }
-            temp.setNext(node);
-        }else{
+        if(thing==null){
             thing = node;
+            thing.setNext(null);
         }
+        Node temp = thing;
+        while(temp.getNext()!=null){
+            temp = temp.getNext();
+        }
+        temp.setNext(node);
+        node.setNext(null);
     }
     
     //inserts a node at the given index or appends to the end if the index is out of bounds
