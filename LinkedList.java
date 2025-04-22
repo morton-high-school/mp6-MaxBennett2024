@@ -29,16 +29,13 @@ public class LinkedList {
     
     //inserts a node at the given index or appends to the end if the index is out of bounds
     public void insert(Node node, int index){
-        int i = index;
         Node temp = thing;
-        if(temp!=null){
-            while(i<=index&&temp.getNext()!=null){
-                temp = temp.getNext();
-           }
-           Node balls = temp.getNext();
-           temp.setNext(node);
-           node.setNext(balls);
+        for(int i =0;i<index&&temp.getNext()!=null;i++){
+            temp = temp.getNext();
         }
+        Node temp2 = temp.getNext();
+        temp.setNext(node);
+        node.setNext(temp2);
     }
 
     //removes and then returns the node at a given index, null if index out of bounds
