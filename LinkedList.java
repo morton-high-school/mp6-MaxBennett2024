@@ -17,40 +17,55 @@ public class LinkedList {
     public void append(Node node){
         if(thing==null){
             thing = node;
-            thing.setNext(null);
-        }
-        Node temp = thing;
+        }else{
+            Node temp = thing;
         while(temp.getNext()!=null){
             temp = temp.getNext();
+            temp.setNext(node);
         }
-        temp.setNext(node);
-        node.setNext(null);
+        }
     }
     
     //inserts a node at the given index or appends to the end if the index is out of bounds
     public void insert(Node node, int index){
-        Node temp = thing;
-        for(int i =0;i<index&&temp.getNext()!=null;i++){
-            temp = temp.getNext();
+        if(index<=0 || thing == null) {
+            node.setNext(thing);
+            thing = node;
+            return;
         }
-        Node temp2 = temp.getNext();
-        temp.setNext(node);
-        node.setNext(temp2);
+        Node temp = thing;
+        int count = 0;
+
+        while(temp.getNext()!=null &&count < index-1){
+            temp = temp.getNext();
+            count++;
+        }
+        node.setNext(temp.getNext());
+        thing.setNext(node);
     }
 
     //removes and then returns the node at a given index, null if index out of bounds
     public Node remove(int index){
-        int i = index;
-        Node temp = thing;
-        if(temp!=null){
-            while(i<=index&&temp.getNext().getNext()!=null){
-                temp = temp.getNext();
-           }
-           Node balls = temp.getNext();
-           temp.setNext(temp.getNext().getNext());
-           return balls;
+        if(thing==null||index<0){
+            return null;
         }
-        return null;
+
+        if(index == 0){
+            return thing;
+        }
+        Node temp = thing;
+        int count = 0;
+        while(temp.getNext()!=null&&count<index-1){
+            temp = temp.getNext();
+            count++;
+        }
+        if(temp.getNext()==null){
+            return null;
+        }
+        Node temp2 = temp.getNext();
+        thing.setNext(thing.getNext().getNext());
+        temp2.setNext(null);
+        return temp2;
     }
     
     //returns information about the linked list
