@@ -15,15 +15,11 @@ public class Node {
 
     //returns the next linked node or null otherwise
     public Node getNext(){
-        if(this.next==null){
-            return null;
-        }
         return this.next;
     }
 
     //sets the next linked node
     public void setNext(Node thing){
-        Node newNode = thing;
-        this.next = newNode;
+        this.next = thing;
     }
 }

@@ -4,12 +4,9 @@ public class LinkedListUtil {
     public static int length(LinkedList value){
         int count = 0;
         Node nuts = value.getFront();
-        if(value.getFront()==null){
-            return 0;
-        }
-        while(nuts.getNext()!=null){
-            nuts=nuts.getNext();
-            count++;
+        if(nuts!= null){
+            count ++;
+            nuts = nuts.getNext();
         }
         return count;
     }
@@ -18,7 +15,7 @@ public class LinkedListUtil {
     public static int search(LinkedList value, int data){
         int index =0;
         Node nuts = value.getFront();
-        while(nuts.getNext()!=null){
+        while(nuts!=null){
             if(nuts.getData()==data){
                 return index;
             }
@@ -30,23 +27,27 @@ public class LinkedListUtil {
 
     //returns the node at a given index, null if index out of bounds
     public static Node getNode(LinkedList value, int index){
-        Node nuts = value.getFront();
-        int i =0;
-        while(i<index&&nuts.getNext()!=null){
-            nuts=nuts.getNext();
-            i++;
-            if(index-i ==1){
-                return nuts;
+        if(index<0){
+            return null;
+        }
+        Node balls = value.getFront();
+        int count = 0;
+        while(balls!=null){
+            if(count==index){
+                return balls;
             }
+            balls = balls.getNext();
+            count++;
         }
         return null;
+
     }
 
     //returns the number of times data occurs in the linked list
     public static int count(LinkedList value, int data){
         int count =0;
         Node nuts = value.getFront();
-        while(nuts.getNext()!=null){
+        while(nuts!=null){
             if(nuts.getData()==data){
                 count++;
             }
@@ -57,36 +58,32 @@ public class LinkedListUtil {
 
     //determines if two lists contain the same data values
     public static boolean compare(LinkedList value1, LinkedList value2){
-        if(length(value1)==length(value2)){
-            Node temp1 = value1.getFront();
-            Node temp2 = value2.getFront();
-            while(temp1.getNext()!=null){
-                if(temp1.getData()==temp2.getData()){
-                    temp1 = temp1.getNext();
-                    temp2 = temp2.getNext();
-                }else{
-                    return false;
-                }
+        Node temp1 = value1.getFront();
+        Node temp2 = value2.getFront();
+        while(temp1!=null&&temp2!=null){
+            if(temp1.getData()!=temp2.getData()){
+                return false;
             }
+            temp1 = temp1.getNext();
+            temp2 = temp2.getNext();
         }
-
-        return false;
+        return true;
     }
 
     //returns a reversed version of the linked list without changing the original
     public static LinkedList reverse(LinkedList value){
-        int len = length(value)-1;
         LinkedList reverse = new LinkedList();
-        for(int i = len;i>=0;i--){
-            Node temp = value.getFront();
-            int j =0;
-            while(j<i){
-                temp = temp.getNext();
-                j++;
+        Node temp = value.getFront();
+        while(temp!=null){
+            Node temp2 = new Node(temp.getData());
+            if(reverse.getFront()==null){
+                reverse.append(temp2);
+            }else{
+                temp2.setNext(reverse.getFront());
+                reverse = new LinkedList();
+                reverse.append(temp2);
             }
-            reverse.append(temp);
         }
-        return null;
+        return reverse;
     }
-
 }
