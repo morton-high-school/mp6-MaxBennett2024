@@ -3,10 +3,10 @@ public class LinkedListUtil {
     //returns the length of the linked list
     public static int length(LinkedList value){
         int count = 0;
-        Node nuts = value.getFront();
-        if(nuts!= null){
-            count ++;
-            nuts = nuts.getNext();
+        Node booty = value.getFront();
+        while(booty != null){
+            count++;
+            booty = booty.getNext();
         }
         return count;
     }
@@ -67,7 +67,7 @@ public class LinkedListUtil {
             temp1 = temp1.getNext();
             temp2 = temp2.getNext();
         }
-        return true;
+        return temp1 ==null&&temp2==null;
     }
 
     //returns a reversed version of the linked list without changing the original
@@ -76,13 +76,10 @@ public class LinkedListUtil {
         Node temp = value.getFront();
         while(temp!=null){
             Node temp2 = new Node(temp.getData());
-            if(reverse.getFront()==null){
-                reverse.append(temp2);
-            }else{
-                temp2.setNext(reverse.getFront());
-                reverse = new LinkedList();
-                reverse.append(temp2);
-            }
+            temp2.setNext(reverse.getFront());
+            reverse = new LinkedList();
+            reverse.append(temp2);
+            temp = temp.getNext();
         }
         return reverse;
     }

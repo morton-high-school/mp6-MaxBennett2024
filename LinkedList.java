@@ -21,8 +21,8 @@ public class LinkedList {
             Node temp = thing;
         while(temp.getNext()!=null){
             temp = temp.getNext();
-            temp.setNext(node);
         }
+        temp.setNext(node);
         }
     }
     
@@ -41,7 +41,7 @@ public class LinkedList {
             count++;
         }
         node.setNext(temp.getNext());
-        thing.setNext(node);
+        temp.setNext(node);
     }
 
     //removes and then returns the node at a given index, null if index out of bounds
@@ -51,7 +51,10 @@ public class LinkedList {
         }
 
         if(index == 0){
-            return thing;
+            Node removed = thing;
+            thing = thing.getNext();
+            removed.setNext(null);
+            return removed;
         }
         Node temp = thing;
         int count = 0;
@@ -63,26 +66,24 @@ public class LinkedList {
             return null;
         }
         Node temp2 = temp.getNext();
-        thing.setNext(thing.getNext().getNext());
+        temp.setNext(temp2.getNext());
         temp2.setNext(null);
         return temp2;
     }
     
     //returns information about the linked list
     public String toString(){
+        if(thing==null){
+            return "There are no items in this list.";
+        }
+        Node temp = thing;
         String result = "";
         int count = 0;
-        Node temp = thing;
-        if(thing!=null){
-            while(temp.getNext()!=null){
-                result += "Index: " + count + " Value: " + temp.getData() + "\n";
-                count++;
-                temp = temp.getNext();
-            }
-        }else{
-            result = "There are no items in this list.";
+        while(temp!=null){
+            result += "Index: " + count + " Data: " + temp.getData() + "\n";
+            count++;
+            temp = temp.getNext();
         }
-        
         return result;
     }
 }
